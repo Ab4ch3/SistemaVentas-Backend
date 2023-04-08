@@ -15,9 +15,11 @@ import path from "path";
 
 //Desestructuramos modulos
 const { Config } = require("./Config/index");
+
 // Importamos Database
 import Database from "./Database";
 
+// Importamos Router
 import router from "./Routes";
 
 // Habilitamos la opcion de debug de nodemon
@@ -30,6 +32,7 @@ Database;
 
 //Indicamos que usaremos morgan , y que estamos en desarrollo
 app.use(morgan("dev"));
+
 // Indicamos que usaremos cors
 app.use(cors());
 
