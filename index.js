@@ -12,39 +12,21 @@ import cors from "cors";
 
 // Importamos Path
 import path from "path";
+
 //Desestructuramos modulos
 const { Config } = require("./Config/index");
+// Importamos Database
+import Database from "./Database";
+
 import router from "./Routes";
-/* 
-Base de datos Test
- */
-import mongoose from "mongoose";
-var connection = null;
-new Promise(async (res, rej) => {
-  try {
-    if (!connection) {
-      connection = await mongoose.connect(
-        `mongodb+srv://${Config.DB_USER}:${Config.DB_PASS}@${Config.DB_CLUSTER}/${Config.DB_NAME}?retryWrites=true&w=majority&appname=taladradora`,
-        { useNewUrlParser: true }
-      );
-      debug("Nueva conexion realizada con MongoDB Atlas");
-    }
-    debug("Reutilizando Conexion con MongoDB Atlas");
-    res(connection);
-  } catch (err) {
-    rej(err);
-    debug("Error en conexion");
-  }
-});
-/*
-Base de datos test
-   */
 
 // Habilitamos la opcion de debug de nodemon
 const debug = require("debug")("app:main");
 
 //Inicializamos el Server Express
 const app = express();
+// Inicializamos Conexion a la base de datos
+Database;
 
 //Indicamos que usaremos morgan , y que estamos en desarrollo
 app.use(morgan("dev"));
@@ -57,7 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 // Indicas a express , cual es la ruta de los archivos publicos
 app.use(express.static(path.join(__dirname, "Public")));
 
-app.use("/api", router);
+app.use(router);
 // Habilitar la escucha del servidor
 app.listen(Config.PORT, () => {
   debug(`Servidor escuchando en el puerto ${Config.PORT} `);

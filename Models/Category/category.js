@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-
 // Definir un modelo
 const categorySchema = new Schema({
   name: { type: String, maxLength: 50, unique: true, required: true },
