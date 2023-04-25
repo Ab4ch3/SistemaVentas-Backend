@@ -83,7 +83,78 @@ export default {
       next(e);
     }
   },
-  removeCategory: async (req, res, next) => {},
-  enableCategory: async (req, res, next) => {},
-  disableCategory: async (req, res, next) => {},
+  removeCategory: async (req, res, next) => {
+    try {
+      const {
+        params: { id },
+      } = req;
+      let categoryDeleted = await categoriesServices.delete(id);
+      if (!categoryDeleted) {
+        res.status(404).send({
+          message: "Not Found",
+        });
+      } else {
+        res.status(200).json({
+          message: "Category Deleted",
+          body: categoryDeleted,
+        });
+      }
+    } catch (e) {
+      debug(e);
+      res.status(500).send({
+        message: "Internal Server Error",
+      });
+      next(e);
+    }
+  },
+  enableCategory: async (req, res, next) => {
+    try {
+      const {
+        params: { id },
+      } = req;
+      const { body } = req;
+      let enableCategory = await categoriesServices.enable(id, body);
+      if (!enableCategory) {
+        res.status(404).send({
+          message: "Not Found",
+        });
+      } else {
+        res.status(200).json({
+          message: "Category Enabled",
+          body: enableCategory,
+        });
+      }
+    } catch (e) {
+      debug(e);
+      res.status(500).send({
+        message: "Internal Server Error",
+      });
+      next(e);
+    }
+  },
+  disableCategory: async (req, res, next) => {
+    try {
+      const {
+        params: { id },
+      } = req;
+      const { body } = req;
+      let disableCategory = await categoriesServices.disable(id, body);
+      if (!disableCategory) {
+        res.status(404).send({
+          message: "Not Found",
+        });
+      } else {
+        res.status(200).json({
+          message: "Category Disabled",
+          body: disableCategory,
+        });
+      }
+    } catch (e) {
+      debug(e);
+      res.status(500).send({
+        message: "Internal Server Error",
+      });
+      next(e);
+    }
+  },
 };

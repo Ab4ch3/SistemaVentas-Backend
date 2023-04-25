@@ -10,6 +10,9 @@ router
   .get("/", categoryController.getCategories)
   .post("/add", categoryController.addCategory)
   .get("/:id", categoryController.getCategory)
-  .put("/update/:id", categoryController.updateCategory);
+  .put("/update/:id", categoryController.updateCategory)
+  .put("/enable/:id", categoryController.enableCategory)
+  .put("/disable/:id", categoryController.disableCategory)
+  .delete("/delete/:id", categoryController.removeCategory);
 
 export default router;
