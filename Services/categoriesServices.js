@@ -1,7 +1,20 @@
 import Models from "../Models";
 export default {
-  getAll: async () => {
-    return await Models.Category.find({});
+  getAll: async (body) => {
+    // Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.
+    // Tambien aplicara busquedas dependiendo del valor q le pasemos
+    let value = body.value;
+    return await Models.Category.find(
+      {
+        $or: [
+          { name: new RegExp(value, "i") },
+          { description: new RegExp(value, "i") },
+        ],
+      },
+      { created_at: 0 }
+    ).sort({
+      created_at: -1,
+    });
   },
   getById: async (id) => {
     return await Models.Category.findById(id);

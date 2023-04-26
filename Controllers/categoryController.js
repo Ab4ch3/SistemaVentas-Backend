@@ -5,7 +5,8 @@ const debug = require("debug")("app:module-CategoryController");
 export default {
   getCategories: async (req, res, next) => {
     try {
-      const categories = await categoriesServices.getAll();
+      const { body } = req;
+      const categories = await categoriesServices.getAll(body);
       res.status(200).json(categories);
     } catch (e) {
       debug(e);
