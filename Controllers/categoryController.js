@@ -13,6 +13,7 @@ export default {
       res.status(500).send({
         message: "Internal Server Error",
       });
+
       next(e);
     }
   },
