@@ -162,7 +162,7 @@ export default {
     try {
       const { body } = req;
       let user = await usersServices.login(body);
-      console.log(user, "desde controllers");
+      // console.log(user, "desde controllers");
       if (!user) {
         res.status(404).send({
           message: "User Not Found",
@@ -170,8 +170,7 @@ export default {
       }
       if (Object.keys(user).length === 0) {
         res.status(401).json({
-          message: "Unauthorized",
-          body: user,
+          message: "UnAuthorized",
         });
       } else {
         res.status(200).json({

@@ -84,7 +84,7 @@ export default {
       if (match) {
         return selectedUser;
       } else {
-        return Math;
+        return [];
       }
     } else {
       return;
