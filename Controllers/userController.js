@@ -162,28 +162,33 @@ export default {
     try {
       const { body } = req;
       let user = await usersServices.login(body);
-      // console.log(user, "desde controllers");
       if (!user) {
+        console.log("desde if user");
         res.status(404).send({
           message: "User Not Found",
         });
       }
-      if (Object.keys(user).length === 0) {
+      if (Object.(user).length === 0) {
+        console.log("ARREGLAR ACA");
         res.status(401).json({
           message: "UnAuthorized",
         });
       } else {
+        console.log("desde else");
         res.status(200).json({
           message: "Login Successfull",
           body: user,
         });
       }
     } catch (e) {
-      debug(e);
+      console.log(e);
+      console.log("desde catch");
+
+      // debug(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
-      next(e);
+      // next(e);
     }
   },
 };

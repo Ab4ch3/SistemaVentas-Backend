@@ -84,10 +84,10 @@ export default {
       if (match) {
         return selectedUser;
       } else {
-        return [];
+        return;
       }
     } else {
-      return;
+      return "g";
     }
   },
 };
