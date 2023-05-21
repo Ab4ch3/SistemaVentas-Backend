@@ -84,10 +84,10 @@ export default {
       if (match) {
         return selectedUser;
       } else {
-        return;
+        return { error: "Password Incorrect" };
       }
     } else {
-      return "g";
+      return; //envia undefined
     }
   },
 };
