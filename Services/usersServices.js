@@ -29,15 +29,12 @@ export default {
   },
   update: async (id, user) => {
     let pass = user.password;
-    console.log(pass, "pass controler ");
 
     const selectedUser = await Models.User.findById(id);
 
     if (pass != selectedUser.password) {
       user.password = await bcrypt.hash(user.password, 10);
     }
-
-    console.log(user.password);
 
     let result = await Models.User.findByIdAndUpdate(
       id,
