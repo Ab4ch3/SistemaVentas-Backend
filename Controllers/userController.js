@@ -146,7 +146,7 @@ export default {
         });
       } else {
         res.status(200).json({
-          message: "Article Disabled",
+          message: "User Disabled",
           body: disableUser,
         });
       }

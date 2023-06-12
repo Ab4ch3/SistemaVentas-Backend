@@ -2,7 +2,7 @@
 import routerx from "express-promise-router";
 // Importamos el Controlador
 import userController from "../Controllers/userController";
-//Importamaos middleware
+//Importamos middleware
 import auth from "../middlewares/auth.js";
 // Asignamos Router
 const router = routerx();
