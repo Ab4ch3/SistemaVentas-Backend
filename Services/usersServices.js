@@ -1,5 +1,6 @@
 import Models from "../Models";
 import bcrypt from "bcryptjs";
+import token from "./token.js";
 export default {
   getAll: async (body) => {
     // Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.
@@ -76,13 +77,18 @@ export default {
     return result;
   },
   login: async (user) => {
-    let selectedUser = await Models.User.findOne({ email: user.email });
+    let selectedUser = await Models.User.findOne({
+      email: user.email,
+      status: true,
+    });
 
     if (selectedUser) {
       let match = await bcrypt.compare(user.password, selectedUser.password);
 
       if (match) {
-        return selectedUser;
+        let tokenReturn = await token.encode(selectedUser._id);
+        console.log(tokenReturn);
+        return { selectedUser, tokenReturn };
       } else {
         return { error: "Password Incorrect" };
       }
