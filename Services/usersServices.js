@@ -112,7 +112,6 @@ export default {
 
       if (match) {
         let tokenReturn = await token.encode(selectedUser._id);
-        console.log(tokenReturn);
         return { selectedUser, tokenReturn };
       } else {
         return { error: "Password Incorrect" };
