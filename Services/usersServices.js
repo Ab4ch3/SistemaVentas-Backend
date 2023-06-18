@@ -28,14 +28,7 @@ export default {
     return await Models.User.create(user);
   },
   update: async (id, user) => {
-    // let pass = user.password;
-
     const selectedUser = await Models.User.findById(id);
-
-    // if (pass != selectedUser.password) {
-    //   user.password = await bcrypt.hash(user.password, 10);
-    // }
-
     let result = await Models.User.findByIdAndUpdate(
       id,
       {
@@ -46,7 +39,6 @@ export default {
         address: user.address,
         phone: user.phone,
         email: user.email,
-        // password: user.password,
       },
       {
         new: true,

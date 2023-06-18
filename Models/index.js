@@ -2,9 +2,11 @@
 import Category from "./Category/category";
 import Article from "./Article/article";
 import User from "./User/user";
+import Person from "./Person/person";
 
 export default {
   Category,
   Article,
   User,
+  Person,
 };
