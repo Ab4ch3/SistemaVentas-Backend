@@ -84,6 +84,30 @@ export default {
       next(e);
     }
   },
+  updatePassword: async (req, res, next) => {
+    try {
+      const {
+        params: { id },
+      } = req;
+      const { body } = req;
+      let passwordUpdated = await usersServices.updatePassword(id, body);
+      if (!passwordUpdated) {
+        res.status(404).send({
+          message: "Not Found",
+        });
+      } else {
+        res.status(200).json({
+          message: "Password Updated",
+        });
+      }
+    } catch (e) {
+      debug(e);
+      res.status(500).send({
+        message: "Internal Server Error",
+      });
+      next(e);
+    }
+  },
   removeUser: async (req, res, next) => {
     try {
       const {

@@ -14,6 +14,7 @@ router
   .post("/login", userController.login)
   .get("/:id", auth.verifyUserAdmin, userController.getUser)
   .put("/update/:id", auth.verifyUserAdmin, userController.updateUser)
+  .put("/password/:id", auth.verifyUserAuth, userController.updatePassword)
   .put("/enable/:id", auth.verifyUserAdmin, userController.enableUser)
   .put("/disable/:id", auth.verifyUserAdmin, userController.disableUser)
   .delete("/delete/:id", auth.verifyUserAdmin, userController.removeUser);
