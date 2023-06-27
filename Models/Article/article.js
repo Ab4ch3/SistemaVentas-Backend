@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const articleSchema = new Schema({
-  category: { type: Schema.ObjectId, ref: "category" },
+  category: { type: Schema.ObjectId, ref: "category" }, //Modelado por referencia
   code: { type: String, maxLength: 64 },
   name: { type: String, maxLength: 64, unique: true, required: true },
   description: { type: String, maxLength: 255 },

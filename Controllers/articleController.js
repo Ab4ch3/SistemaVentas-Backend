@@ -38,6 +38,25 @@ export default {
       next(e);
     }
   },
+  getArticleByBarCode: async (req, res, next) => {
+    try {
+      const { body } = req;
+      let article = await articlesServices.getByBarCode(body);
+      if (!article) {
+        res.status(404).send({
+          message: "Not Found",
+        });
+      } else {
+        res.status(200).json(article);
+      }
+    } catch (e) {
+      debug(e);
+      res.status(500).send({
+        message: "Internal Server Error",
+      });
+      next(e);
+    }
+  },
   addArticle: async (req, res, next) => {
     try {
       const { body } = req;

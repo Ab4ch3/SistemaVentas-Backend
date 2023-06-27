@@ -12,6 +12,7 @@ router
   .get("/", auth.verifyUserStorekeeper, articleController.getArticles)
   .post("/add", auth.verifyUserStorekeeper, articleController.addArticle)
   .get("/:id", auth.verifyUserStorekeeper, articleController.getArticle)
+  .get("/code", auth.verifyUserAuth, articleController.getArticleByBarCode)
   .put(
     "/update/:id",
     auth.verifyUserStorekeeper,

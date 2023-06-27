@@ -22,6 +22,12 @@ export default {
   getById: async (id) => {
     return await Models.Article.findById(id).populate("category", { name: 1 });
   },
+  getByBarCode: async (article) => {
+    return await Models.Article.findOne({ code: article.code }).populate(
+      "category",
+      { name: 1 }
+    );
+  },
   create: async (article) => {
     return await Models.Article.create(article);
   },
