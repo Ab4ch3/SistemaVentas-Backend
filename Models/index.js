@@ -4,6 +4,7 @@ import Article from "./Article/article";
 import User from "./User/user";
 import Person from "./Person/person";
 import Income from "./Income/income";
+import Sale from "./Sales/sales";
 
 export default {
   Category,
@@ -11,4 +12,5 @@ export default {
   User,
   Person,
   Income,
+  Sale,
 };

@@ -23,7 +23,7 @@ export default {
     // Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.
     // Tambien aplicara busquedas dependiendo del valor q le pasemos
     let value = body.value;
-    return await Models.Income.find({
+    return await Models.Sale.find({
       $or: [
         { voucher_num: new RegExp(value, "i") },
         { voucher_series: new RegExp(value, "i") },
@@ -36,43 +36,27 @@ export default {
       });
   },
   getById: async (id) => {
-    return await Models.Income.findById(id)
+    return await Models.Sale.findById(id)
       //Populate nos permite buscar referencias en otras colecciones
       .populate("user", { name: 1 }) //en este caso buscando en la coleccion user , el nombre de ese Income
       .populate("person", { name: 1 }); //en este caso buscando en la coleccion person , el nombre de ese Income;
   },
 
-  create: async (income) => {
-    let newIncome = await Models.Income.create(income);
+  create: async (sale) => {
+    let newSale = await Models.Sale.create(sale);
     //Actualizamos el stock
     //Recorremos cada unos de los objetos
-    let details = newIncome.details;
+    let details = newSale.details;
     details.map((item) => {
-      incrementStock(item._id, item.total_article);
+      reduceStock(item._id, item.total_article);
     });
-    return newIncome;
+    return newSale;
   },
 
-  enable: async (id, income) => {
-    let result = await Models.Income.findByIdAndUpdate(
+  enable: async (id, sale) => {
+    let result = await Models.Sale.findByIdAndUpdate(
       id,
-      { status: income.status },
-      {
-        new: true,
-      }
-    );
-    //Actualizamos el stock
-    //Recorremos cada unos de los objetos
-    let details = result.details;
-    details.map((item) => {
-      incrementStock(item._id, item.total_article);
-    });
-    return result;
-  },
-  disable: async (id, income) => {
-    let result = await Models.Income.findByIdAndUpdate(
-      id,
-      { status: income.status },
+      { status: sale.status },
       {
         new: true,
       }
@@ -82,6 +66,22 @@ export default {
     let details = result.details;
     details.map((item) => {
       reduceStock(item._id, item.total_article);
+    });
+    return result;
+  },
+  disable: async (id, sale) => {
+    let result = await Models.Sale.findByIdAndUpdate(
+      id,
+      { status: sale.status },
+      {
+        new: true,
+      }
+    );
+    //Actualizamos el stock
+    //Recorremos cada unos de los objetos
+    let details = result.details;
+    details.map((item) => {
+      incrementStock(item._id, item.total_article);
     });
 
     return result;
