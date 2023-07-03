@@ -1,6 +1,7 @@
 // Importar Servicios
-import articlesServices from "../Services/articlesServices";
-const debug = require("debug")("app:module-ArticleController");
+import articlesServices from "../Services/articlesServices.js";
+import debug from "debug";
+const logger = debug("app:module-ArticleController");
 
 export default {
   getArticles: async (req, res, next) => {
@@ -9,7 +10,7 @@ export default {
       const articles = await articlesServices.getAll(body);
       res.status(200).json(articles);
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -31,7 +32,7 @@ export default {
         res.status(200).json(article);
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -50,7 +51,7 @@ export default {
         res.status(200).json(article);
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -72,7 +73,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -97,7 +98,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -121,7 +122,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -146,7 +147,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -171,7 +172,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });

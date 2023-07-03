@@ -1,5 +1,7 @@
-import personServices from "../Services/personServices";
-const debug = require("debug")("app:module-PersonController");
+import personServices from "../Services/personServices.js";
+// const debug = require("debug")("app:module-PersonController");
+import debug from "debug";
+const logger = debug("app:module-PersonController");
 
 export default {
   getAllPerson: async (req, res, next) => {
@@ -8,7 +10,7 @@ export default {
       const person = await personServices.getAll(body);
       res.status(200).json(person);
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -30,7 +32,7 @@ export default {
         res.status(200).json(person);
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -43,7 +45,7 @@ export default {
       const clients = await personServices.getClients(body);
       res.status(200).json(clients);
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -57,7 +59,7 @@ export default {
       const providers = await personServices.getProviders(body);
       res.status(200).json(providers);
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -80,7 +82,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -105,7 +107,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -130,7 +132,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -155,7 +157,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -180,7 +182,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });

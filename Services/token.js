@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
-import Models from "../Models";
-const debug = require("debug")("app:services-token");
+import Models from "../Models/index.js";
+// const debug = require("debug")("app:services-token");
+import debug from "debug";
+const logger = debug("app:services-token");
 
 async function checkToken(token) {
   let __id = null;
@@ -8,7 +10,7 @@ async function checkToken(token) {
     const { _id } = await jwt.decode(token);
     __id = _id;
   } catch (e) {
-    debug(e);
+    logger(e);
     return false;
   }
   const user = await Models.User.findOne({ _id: __id });
@@ -36,9 +38,9 @@ export default {
         return false;
       }
     } catch (e) {
+      logger(e);
       const newToken = await checkToken(token);
       return newToken;
-      debug(e);
     }
   },
 };

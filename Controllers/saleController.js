@@ -1,7 +1,8 @@
 // Importar Servicios
-import SaleServices from "../Services/saleServices";
-const debug = require("debug")("app:module-SaleController");
-
+import SaleServices from "../Services/saleServices.js";
+// const debug = require("debug")("app:module-SaleController");
+import debug from "debug";
+const logger = debug("app:module-SaleController");
 export default {
   getAllSale: async (req, res, next) => {
     try {
@@ -9,7 +10,7 @@ export default {
       let sale = await SaleServices.getAll(body);
       res.status(200).json(sale);
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -31,7 +32,7 @@ export default {
         res.status(200).json(sale);
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -53,7 +54,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -78,7 +79,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -103,7 +104,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -113,7 +114,7 @@ export default {
   GetGraph12Months: async (req, res, next) => {
     try {
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });

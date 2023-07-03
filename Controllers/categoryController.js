@@ -1,6 +1,8 @@
 // Importar Servicios
-import categoriesServices from "../Services/categoriesServices";
-const debug = require("debug")("app:module-CategoryController");
+import debug from "debug";
+import categoriesServices from "../Services/categoriesServices.js";
+const logger = debug("app:module-CategoryController");
+// const debug = require("debug")("app:module-CategoryController");
 
 export default {
   getCategories: async (req, res, next) => {
@@ -9,7 +11,7 @@ export default {
       const categories = await categoriesServices.getAll(body);
       res.status(200).json(categories);
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -31,7 +33,7 @@ export default {
         res.status(200).json(category);
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -53,7 +55,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -78,7 +80,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -102,7 +104,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -127,7 +129,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -152,7 +154,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });

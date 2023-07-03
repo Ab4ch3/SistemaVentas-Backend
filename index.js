@@ -12,19 +12,24 @@ import cors from "cors";
 
 // Importamos Path
 import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //Desestructuramos modulos
-const { Config } = require("./Config/index");
+import { Config } from "./Config/index.js";
 
 // Importamos Database
-import Database from "./Database";
+import Database from "./Database/index.js";
 
 // Importamos Router
-import router from "./Routes";
+import router from "./Routes/index.js";
 
 // Habilitamos la opcion de debug de nodemon
-const debug = require("debug")("app:main");
-
+// const debug = require("debug")("app:main");
+import debug from "debug";
+const logger = debug("app:module-database");
 //Inicializamos el Server Express
 const app = express();
 // Inicializamos Conexion a la base de datos
@@ -45,5 +50,5 @@ app.use(express.static(path.join(__dirname, "Public")));
 app.use(router);
 // Habilitar la escucha del servidor
 app.listen(Config.PORT, () => {
-  debug(`Servidor escuchando en el puerto ${Config.PORT} `);
+  logger(`Servidor escuchando en el puerto ${Config.PORT} `);
 });

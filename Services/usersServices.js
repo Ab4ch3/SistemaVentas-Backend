@@ -1,4 +1,4 @@
-import Models from "../Models";
+import Models from "../Models/index.js";
 import bcrypt from "bcryptjs";
 import token from "./token.js";
 export default {

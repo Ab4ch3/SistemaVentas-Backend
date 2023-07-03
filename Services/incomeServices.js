@@ -1,4 +1,4 @@
-import Models from "../Models";
+import Models from "../Models/index.js";
 
 const incrementStock = async (id, amount) => {
   let { stock } = await Models.Article.findOne({ _id: id });

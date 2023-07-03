@@ -1,10 +1,10 @@
 // Vamos a importar todos los modelos aca para tenerlos en un solo lugar
-import Category from "./Category/category";
-import Article from "./Article/article";
-import User from "./User/user";
-import Person from "./Person/person";
-import Income from "./Income/income";
-import Sale from "./Sales/sales";
+import Category from "./Category/category.js";
+import Article from "./Article/article.js";
+import User from "./User/user.js";
+import Person from "./Person/person.js";
+import Income from "./Income/income.js";
+import Sale from "./Sales/sales.js";
 
 export default {
   Category,

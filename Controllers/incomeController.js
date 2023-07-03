@@ -1,7 +1,8 @@
 // Importar Servicios
-import incomeServices from "../Services/incomeServices";
-const debug = require("debug")("app:module-IncomeController");
-
+import incomeServices from "../Services/incomeServices.js";
+// const debug = require("debug")("app:module-IncomeController");
+import debug from "debug";
+const logger = debug("app:module-IncomeController");
 export default {
   getAllIncome: async (req, res, next) => {
     try {
@@ -9,7 +10,7 @@ export default {
       let income = await incomeServices.getAll(body);
       res.status(200).json(income);
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -31,7 +32,7 @@ export default {
         res.status(200).json(income);
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -54,7 +55,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -80,7 +81,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
@@ -105,7 +106,7 @@ export default {
         });
       }
     } catch (e) {
-      debug(e);
+      logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });

@@ -1,8 +1,10 @@
 // Controla Todo lo relacionado con la conexion a base de datos
 // Importamos mongoose
 import mongoose from "mongoose";
-const debug = require("debug")("app:module-database");
-const { Config } = require("../Config/index.js");
+import debug from "debug";
+const logger = debug("app:module-database");
+import { Config } from "../Config/index.js";
+// const { Config } = require("../Config/index.js");
 var connection = null;
 
 const Database = new Promise(async (res, rej) => {
@@ -12,13 +14,13 @@ const Database = new Promise(async (res, rej) => {
         `mongodb+srv://${Config.DB_USER}:${Config.DB_PASS}@${Config.DB_CLUSTER}/${Config.DB_NAME}?retryWrites=true&w=majority`,
         { useNewUrlParser: true }
       );
-      debug("Connected To MongoDB Atlas");
+      logger("Connected To MongoDB Atlas");
     }
-    debug("Reusing Connection To MongoDB Atlas");
+    logger("Reusing Connection To MongoDB Atlas");
     res(connection);
   } catch (err) {
     rej(err);
-    debug("Connection Error");
+    logger("Connection Error");
   }
 });
 export default Database;

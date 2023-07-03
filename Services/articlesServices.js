@@ -1,4 +1,4 @@
-import Models from "../Models";
+import Models from "../Models/index.js";
 export default {
   getAll: async (body) => {
     // Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.

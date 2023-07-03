@@ -1,7 +1,7 @@
 // Importamos Router
 import routerx from "express-promise-router";
 // Importamos el Controlador
-import SaleController from "../Controllers/saleController";
+import SaleController from "../Controllers/saleController.js";
 //Importamos middleware
 import auth from "../middlewares/auth.js";
 // Asignamos Router
