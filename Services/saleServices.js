@@ -86,4 +86,7 @@ export default {
 
     return result;
   },
+  graphs12Months: async () => {
+    let result = await Models.Sale.aggregate([]);
+  },
 };

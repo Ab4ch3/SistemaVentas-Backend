@@ -38,7 +38,6 @@ export default {
       next(e);
     }
   },
-
   addSale: async (req, res, next) => {
     try {
       const { body } = req;
@@ -61,7 +60,6 @@ export default {
       next(e);
     }
   },
-
   enableSale: async (req, res, next) => {
     try {
       const {
@@ -104,6 +102,16 @@ export default {
           body: disableSale,
         });
       }
+    } catch (e) {
+      debug(e);
+      res.status(500).send({
+        message: "Internal Server Error",
+      });
+      next(e);
+    }
+  },
+  GetGraph12Months: async (req, res, next) => {
+    try {
     } catch (e) {
       debug(e);
       res.status(500).send({

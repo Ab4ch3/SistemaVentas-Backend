@@ -1,3 +1,4 @@
+# La Base que se usara en este caso node
 FROM node:18
 
 # Create app directory
@@ -15,5 +16,5 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-EXPOSE 4000
-CMD [ "npm", "run", "dev" ]
+EXPOSE 5000
+CMD [ "npm", "start"]
