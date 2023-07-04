@@ -3,7 +3,7 @@
 import mongoose from "mongoose";
 import debug from "debug";
 const logger = debug("app:module-database");
-import { Config } from "../Config/index.js";
+import Config from "../Config/index.js";
 // const { Config } = require("../Config/index.js");
 var connection = null;
 
@@ -23,4 +23,5 @@ const Database = new Promise(async (res, rej) => {
     logger("Connection Error");
   }
 });
+// Esportar default solo 1 funcion
 export default Database;

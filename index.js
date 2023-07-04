@@ -18,7 +18,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //Desestructuramos modulos
-import { Config } from "./Config/index.js";
+import Config from "./Config/index.js";
 
 // Importamos Database
 import Database from "./Database/index.js";

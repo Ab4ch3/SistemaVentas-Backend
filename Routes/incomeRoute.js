@@ -10,6 +10,8 @@ const router = routerx();
 // Espeficiamos Rutas
 router
   .get("/", auth.verifyUserStorekeeper, IncomeController.getAllIncome)
+  .get("/checkDates", auth.verifyUserAuth, IncomeController.getCheckDates)
+  .get("/graph12", auth.verifyUserAuth, IncomeController.GetGraph12Months)
   .post("/add", auth.verifyUserStorekeeper, IncomeController.addIncome)
   .get("/:id", auth.verifyUserStorekeeper, IncomeController.getIncome)
   .put("/enable/:id", auth.verifyUserStorekeeper, IncomeController.enableIncome)

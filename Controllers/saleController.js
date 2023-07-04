@@ -113,11 +113,27 @@ export default {
   },
   GetGraph12Months: async (req, res, next) => {
     try {
+      let graph = await SaleServices.graphs12Months();
+      res.status(200).json(graph);
     } catch (e) {
       logger(e);
       res.status(500).send({
         message: "Internal Server Error",
       });
+      next(e);
+    }
+  },
+  getCheckDates: async (req, res, next) => {
+    try {
+      const { body } = req;
+      let result = await SaleServices.checkDates(body);
+      res.status(200).json(result);
+    } catch (e) {
+      logger(e);
+      res.status(500).send({
+        message: "Internal Server Error",
+      });
+
       next(e);
     }
   },

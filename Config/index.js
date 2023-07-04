@@ -9,5 +9,4 @@ const Config = {
   DB_CLUSTER: process.env.DB_CLUSTER,
   DB_NAME: process.env.DB_NAME,
 };
-
-export { Config };
+export default Config;
