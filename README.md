@@ -1,12 +1,15 @@
-# API-Rest Ventas
-API-Rest Para sistema de almacen, inventario y ventas
+# Rest API Ventas
+
+API-Rest para sistema de almacen, inventario y ventas.
 
 ## Project setup
+
 ```
 npm install
 ```
 
 ### Compiles for development
+
 ```
-npm run serve
+npm run dev
 ```
