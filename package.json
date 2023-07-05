@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "backend de sistema de ventas desarrollado en node y express",
   "type": "module",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "dev": "export DEBUG=app:* && nodemon index.js --exec babel-node",
-    "start": "node index.js"
+    "dev": "export DEBUG=app:* && nodemon ./src/index.js --exec babel-node",
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
