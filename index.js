@@ -50,5 +50,5 @@ app.use(express.static(path.join(__dirname, "Public")));
 app.use(router);
 // Habilitar la escucha del servidor
 app.listen(Config.PORT, () => {
-  logger(`Servidor escuchando en el puerto ${Config.PORT} `);
+  console.log(`Servidor escuchando en el puerto ${Config.PORT} `);
 });
