@@ -1,9 +1,9 @@
 // Importamos Router
 import routerx from "express-promise-router";
 // Importamos el Controlador
-import categoryController from "../Controllers/categoryController.js";
+import categoryController from "../../Controllers/categoryController.js";
 //Importamos middleware
-import auth from "../middlewares/auth.js";
+import auth from "../../middlewares/auth.js";
 // Asignamos Router
 const router = routerx();
 

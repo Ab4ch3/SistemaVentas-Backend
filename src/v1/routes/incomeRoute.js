@@ -1,9 +1,9 @@
 // Importamos Router
 import routerx from "express-promise-router";
 // Importamos el Controlador
-import IncomeController from "../Controllers/incomeController.js";
+import IncomeController from "../../Controllers/incomeController.js";
 //Importamos middleware
-import auth from "../middlewares/auth.js";
+import auth from "../../middlewares/auth.js";
 // Asignamos Router
 const router = routerx();
 

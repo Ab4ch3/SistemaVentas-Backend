@@ -21,11 +21,10 @@ import Config from "./Config/index.js";
 import Database from "./Database/index.js";
 
 // Importamos Router
-import router from "./Routes/index.js";
+// import router from "./Routes/index.js";
 
-// Habilitamos la opcion de debug de nodemon
-import debug from "debug";
-const logger = debug("app:module-database");
+// Importamos v1 Router
+import v1Router from "./v1/routes/index.js";
 
 //Inicializamos el Server Express
 const app = express();
@@ -47,9 +46,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "Public")));
 
 //Indicamos el uso de router.
-app.use(router);
+app.use(v1Router);
 
 // Habilitar la escucha del servidor
 app.listen(Config.PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${Config.PORT} `);
+  console.info(`Servidor escuchando en el puerto ${Config.PORT} `);
 });
