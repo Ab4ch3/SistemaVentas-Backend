@@ -1,6 +1,5 @@
 // Importar Servicios
 import incomeServices from "../Services/incomeServices.js";
-// const debug = require("debug")("app:module-IncomeController");
 import debug from "debug";
 const logger = debug("app:module-IncomeController");
 export default {

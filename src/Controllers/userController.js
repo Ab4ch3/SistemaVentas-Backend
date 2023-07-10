@@ -184,32 +184,4 @@ export default {
       next(e);
     }
   },
-  login: async (req, res, next) => {
-    try {
-      const { body } = req;
-      let user = await usersServices.login(body);
-      if (!user) {
-        return res.status(404).send({
-          message: "User Not Found",
-        });
-      }
-      if (Object.hasOwn(user, "error")) {
-        res.status(401).json({
-          message: "Unauthorized",
-          body: user.error,
-        });
-      } else {
-        res.status(200).json({
-          message: "Login Successfull",
-          body: user,
-        });
-      }
-    } catch (e) {
-      logger(e);
-      res.status(500).send({
-        message: "Internal Server Error",
-      });
-      next(e);
-    }
-  },
 };

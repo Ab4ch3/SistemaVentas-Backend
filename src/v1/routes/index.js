@@ -5,6 +5,7 @@ import usersRoute from "./userRoute.js";
 import personsRoute from "./personsRoute.js";
 import incomesRoute from "./incomeRoute.js";
 import salesRoute from "./saleRoute.js";
+import authRoute from "./authRoute.js";
 
 const router = routerx();
 
@@ -14,5 +15,6 @@ router.use("/api/v1/users", usersRoute);
 router.use("/api/v1/persons", personsRoute);
 router.use("/api/v1/incomes", incomesRoute);
 router.use("/api/v1/sales", salesRoute);
+router.use("/api/v1/auth", authRoute);
 
 export default router;

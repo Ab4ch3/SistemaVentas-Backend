@@ -11,7 +11,6 @@ const router = routerx();
 router
   .get("/", auth.verifyUserAdmin, userController.getUsers)
   .post("/add", auth.verifyUserAdmin, userController.addUser)
-  .post("/login", userController.login)
   .get("/:id", auth.verifyUserAdmin, userController.getUser)
   .put("/update/:id", auth.verifyUserAdmin, userController.updateUser)
   .put("/password/:id", auth.verifyUserAuth, userController.updatePassword)
