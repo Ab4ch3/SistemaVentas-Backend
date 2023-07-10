@@ -12,11 +12,11 @@ router
   .get("/", auth.verifyUserAuth, personController.getAllPerson)
   .get("/clients", auth.verifyUserAuth, personController.getClients)
   .get("/providers", auth.verifyUserAuth, personController.getProviders)
-  .post("/add", auth.verifyUserAuth, personController.addPerson)
+  .post("/add", auth.verifyUserAuth, personController.createPerson)
   .get("/:id", auth.verifyUserAuth, personController.getPerson)
   .put("/update/:id", auth.verifyUserAuth, personController.updatePerson)
   .put("/enable/:id", auth.verifyUserAuth, personController.enablePerson)
   .put("/disable/:id", auth.verifyUserAuth, personController.disablePerson)
-  .delete("/delete/:id", auth.verifyUserAuth, personController.removePerson);
+  .delete("/delete/:id", auth.verifyUserAuth, personController.deletePerson);
 
 export default router;

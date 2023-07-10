@@ -1,6 +1,6 @@
 import Models from "../Models/index.js";
 export default {
-  getAll: async (body) => {
+  getAllPerson: async (body) => {
     // Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.
     // Tambien aplicara busquedas dependiendo del valor q le pasemos
     let value = body.value;
@@ -46,13 +46,13 @@ export default {
       created_at: -1,
     });
   },
-  getById: async (id) => {
+  getPerson: async (id) => {
     return await Models.Person.findById(id);
   },
-  create: async (user) => {
-    return await Models.Person.create(user);
+  createPerson: async (person) => {
+    return await Models.Person.create(person);
   },
-  update: async (id, person) => {
+  updatePerson: async (id, person) => {
     // const selectedPerson = await Models.User.findById(id);
     let result = await Models.Person.findByIdAndUpdate(
       id,
@@ -72,11 +72,11 @@ export default {
     return result;
   },
 
-  delete: async (id) => {
+  deletePerson: async (id) => {
     let result = await Models.Person.findByIdAndDelete(id);
     return result;
   },
-  enable: async (id, person) => {
+  enablePerson: async (id, person) => {
     let result = await Models.Person.findByIdAndUpdate(
       id,
       { status: person.status },
@@ -86,7 +86,7 @@ export default {
     );
     return result;
   },
-  disable: async (id, person) => {
+  disablePerson: async (id, person) => {
     let result = await Models.Person.findByIdAndUpdate(
       id,
       { status: person.status },

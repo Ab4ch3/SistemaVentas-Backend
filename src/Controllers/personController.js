@@ -1,5 +1,4 @@
 import personServices from "../Services/personServices.js";
-// const debug = require("debug")("app:module-PersonController");
 import debug from "debug";
 const logger = debug("app:module-PersonController");
 
@@ -7,8 +6,8 @@ export default {
   getAllPerson: async (req, res, next) => {
     try {
       const { body } = req;
-      const person = await personServices.getAll(body);
-      res.status(200).json(person);
+      const AllPersons = await personServices.getAllPerson(body);
+      res.status(200).json({ data: AllPersons });
     } catch (e) {
       logger(e);
       res.status(500).send({
@@ -23,13 +22,13 @@ export default {
       const {
         params: { id },
       } = req;
-      let person = await personServices.getById(id);
+      let person = await personServices.getPerson(id);
       if (!person) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
-        res.status(200).json(person);
+        res.status(200).json({ data: person });
       }
     } catch (e) {
       logger(e);
@@ -43,7 +42,7 @@ export default {
     try {
       const { body } = req;
       const clients = await personServices.getClients(body);
-      res.status(200).json(clients);
+      res.status(200).json({ data: clients });
     } catch (e) {
       logger(e);
       res.status(500).send({
@@ -57,7 +56,7 @@ export default {
     try {
       const { body } = req;
       const providers = await personServices.getProviders(body);
-      res.status(200).json(providers);
+      res.status(200).json({ data: providers });
     } catch (e) {
       logger(e);
       res.status(500).send({
@@ -67,7 +66,7 @@ export default {
       next(e);
     }
   },
-  addPerson: async (req, res, next) => {
+  createPerson: async (req, res, next) => {
     try {
       const { body } = req;
       if (!body || Object.keys(body).length === 0) {
@@ -75,10 +74,10 @@ export default {
           message: "Bad Request",
         });
       } else {
-        const newPerson = await personServices.create(body);
+        const createdPerson = await personServices.createPerson(body);
         res.status(201).json({
           message: "Person Created",
-          body: newPerson,
+          data: createdPerson,
         });
       }
     } catch (e) {
@@ -95,15 +94,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let personUpdate = await personServices.update(id, body);
-      if (!personUpdate) {
+      let UpdatedPerson = await personServices.updatePerson(id, body);
+      if (!UpdatedPerson) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Person Updated",
-          body: personUpdate,
+          data: UpdatedPerson,
         });
       }
     } catch (e) {
@@ -115,20 +114,20 @@ export default {
     }
   },
 
-  removePerson: async (req, res, next) => {
+  deletePerson: async (req, res, next) => {
     try {
       const {
         params: { id },
       } = req;
-      let personDeleted = await personServices.delete(id);
-      if (!personDeleted) {
+      let DeletedPerson = await personServices.deletePerson(id);
+      if (!DeletedPerson) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Person Deleted",
-          body: personDeleted,
+          data: DeletedPerson,
         });
       }
     } catch (e) {
@@ -145,15 +144,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let enablePerson = await personServices.enable(id, body);
-      if (!enablePerson) {
+      let enabledPerson = await personServices.enablePerson(id, body);
+      if (!enabledPerson) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Person Enabled",
-          body: enablePerson,
+          data: enabledPerson,
         });
       }
     } catch (e) {
@@ -170,15 +169,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let disablePerson = await personServices.disable(id, body);
-      if (!disablePerson) {
+      let disabledPerson = await personServices.disablePerson(id, body);
+      if (!disabledPerson) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Person Disabled",
-          body: disablePerson,
+          data: disabledPerson,
         });
       }
     } catch (e) {
