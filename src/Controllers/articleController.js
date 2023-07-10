@@ -1,14 +1,14 @@
 // Importar Servicios
-import articlesServices from "../Services/articlesServices.js";
+import articleServices from "../Services/articleServices.js";
 import debug from "debug";
 const logger = debug("app:module-ArticleController");
 
 export default {
-  getArticles: async (req, res, next) => {
+  getAllArticles: async (req, res, next) => {
     try {
       const { body } = req;
-      const articles = await articlesServices.getAll(body);
-      res.status(200).json(articles);
+      const allArticles = await articleServices.getAllArticles(body);
+      res.status(200).json({ data: allArticles });
     } catch (e) {
       logger(e);
       res.status(500).send({
@@ -23,13 +23,13 @@ export default {
       const {
         params: { id },
       } = req;
-      let article = await articlesServices.getById(id);
+      let article = await articleServices.getArticle(id);
       if (!article) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
-        res.status(200).json(article);
+        res.status(200).json({ data: article });
       }
     } catch (e) {
       logger(e);
@@ -42,13 +42,13 @@ export default {
   getArticleByBarCode: async (req, res, next) => {
     try {
       const { body } = req;
-      let article = await articlesServices.getByBarCode(body);
+      let article = await articleServices.getArticleByBarCode(body);
       if (!article) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
-        res.status(200).json(article);
+        res.status(200).json({ data: article });
       }
     } catch (e) {
       logger(e);
@@ -58,7 +58,7 @@ export default {
       next(e);
     }
   },
-  addArticle: async (req, res, next) => {
+  createArticle: async (req, res, next) => {
     try {
       const { body } = req;
       if (!body || Object.keys(body).length === 0) {
@@ -66,10 +66,10 @@ export default {
           message: "Bad Request",
         });
       } else {
-        const newArticle = await articlesServices.create(body);
+        const createdArticle = await articleServices.createArticle(body);
         res.status(201).json({
           message: "Article Created",
-          body: newArticle,
+          data: createdArticle,
         });
       }
     } catch (e) {
@@ -86,15 +86,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let articleUpdate = await articlesServices.update(id, body);
-      if (!articleUpdate) {
+      let updatedArticle = await articleServices.updateArticle(id, body);
+      if (!updatedArticle) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Article Updated",
-          body: articleUpdate,
+          data: updatedArticle,
         });
       }
     } catch (e) {
@@ -105,20 +105,20 @@ export default {
       next(e);
     }
   },
-  removeArticle: async (req, res, next) => {
+  deleteArticle: async (req, res, next) => {
     try {
       const {
         params: { id },
       } = req;
-      let articleDeleted = await articlesServices.delete(id);
-      if (!articleDeleted) {
+      let deletedArticle = await articleServices.deleteArticle(id);
+      if (!deletedArticle) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Article Deleted",
-          body: articleDeleted,
+          data: deletedArticle,
         });
       }
     } catch (e) {
@@ -135,15 +135,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let enableArticle = await articlesServices.enable(id, body);
-      if (!enableArticle) {
+      let enabledArticle = await articleServices.enableArticle(id, body);
+      if (!enabledArticle) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Article Enabled",
-          body: enableArticle,
+          data: enabledArticle,
         });
       }
     } catch (e) {
@@ -160,15 +160,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let disableArticle = await articlesServices.disable(id, body);
-      if (!disableArticle) {
+      let disabledArticle = await articleServices.disableArticle(id, body);
+      if (!disabledArticle) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Article Disabled",
-          body: disableArticle,
+          data: disabledArticle,
         });
       }
     } catch (e) {

@@ -1,6 +1,6 @@
 import Models from "../Models/index.js";
 export default {
-  getAll: async (body) => {
+  getAllArticles: async (body) => {
     // Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.
     // Tambien aplicara busquedas dependiendo del valor q le pasemos
     let value = body.value;
@@ -19,19 +19,19 @@ export default {
         created_at: -1,
       });
   },
-  getById: async (id) => {
+  getArticle: async (id) => {
     return await Models.Article.findById(id).populate("category", { name: 1 });
   },
-  getByBarCode: async (article) => {
+  getArticleByBarCode: async (article) => {
     return await Models.Article.findOne({ code: article.code }).populate(
       "category",
       { name: 1 }
     );
   },
-  create: async (article) => {
+  createArticle: async (article) => {
     return await Models.Article.create(article);
   },
-  update: async (id, article) => {
+  updateArticle: async (id, article) => {
     let result = await Models.Article.findByIdAndUpdate(
       id,
       {
@@ -48,11 +48,11 @@ export default {
     );
     return result;
   },
-  delete: async (id) => {
+  deleteArticle: async (id) => {
     let result = await Models.Article.findByIdAndDelete(id);
     return result;
   },
-  enable: async (id, article) => {
+  enableArticle: async (id, article) => {
     let result = await Models.Article.findByIdAndUpdate(
       id,
       { status: article.status },
@@ -62,7 +62,7 @@ export default {
     );
     return result;
   },
-  disable: async (id, article) => {
+  disableArticle: async (id, article) => {
     let result = await Models.Article.findByIdAndUpdate(
       id,
       { status: article.status },

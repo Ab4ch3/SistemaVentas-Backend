@@ -1,15 +1,14 @@
 // Importar Servicios
 import debug from "debug";
-import categoriesServices from "../Services/categoriesServices.js";
+import categoryServices from "../Services/categoryServices.js";
 const logger = debug("app:module-CategoryController");
-// const debug = require("debug")("app:module-CategoryController");
 
 export default {
-  getCategories: async (req, res, next) => {
+  getAllCategories: async (req, res, next) => {
     try {
       const { body } = req;
-      const categories = await categoriesServices.getAll(body);
-      res.status(200).json(categories);
+      const Allcategories = await categoryServices.getAllCategories(body);
+      res.status(200).json({ data: Allcategories });
     } catch (e) {
       logger(e);
       res.status(500).send({
@@ -24,13 +23,13 @@ export default {
       const {
         params: { id },
       } = req;
-      let category = await categoriesServices.getById(id);
+      let category = await categoryServices.getCategory(id);
       if (!category) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
-        res.status(200).json(category);
+        res.status(200).json({ data: category });
       }
     } catch (e) {
       logger(e);
@@ -40,7 +39,7 @@ export default {
       next(e);
     }
   },
-  addCategory: async (req, res, next) => {
+  createNewCategory: async (req, res, next) => {
     try {
       const { body } = req;
       if (!body || Object.keys(body).length === 0) {
@@ -48,10 +47,10 @@ export default {
           message: "Bad Request",
         });
       } else {
-        const newCategory = await categoriesServices.create(body);
+        const createdCategory = await categoryServices.createNewCategory(body);
         res.status(201).json({
           message: "Category Created",
-          body: newCategory,
+          data: createdCategory,
         });
       }
     } catch (e) {
@@ -68,15 +67,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let categoryUpdate = await categoriesServices.update(id, body);
-      if (!categoryUpdate) {
+      let Updatedcategory = await categoryServices.updateCategory(id, body);
+      if (!Updatedcategory) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Category Updated",
-          body: categoryUpdate,
+          data: Updatedcategory,
         });
       }
     } catch (e) {
@@ -87,20 +86,20 @@ export default {
       next(e);
     }
   },
-  removeCategory: async (req, res, next) => {
+  deleteCategory: async (req, res, next) => {
     try {
       const {
         params: { id },
       } = req;
-      let categoryDeleted = await categoriesServices.delete(id);
-      if (!categoryDeleted) {
+      let Deletedcategory = await categoryServices.deleteCategory(id);
+      if (!Deletedcategory) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Category Deleted",
-          body: categoryDeleted,
+          data: Deletedcategory,
         });
       }
     } catch (e) {
@@ -117,15 +116,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let enableCategory = await categoriesServices.enable(id, body);
-      if (!enableCategory) {
+      let enabledCategory = await categoryServices.enableCategory(id, body);
+      if (!enabledCategory) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Category Enabled",
-          body: enableCategory,
+          data: enabledCategory,
         });
       }
     } catch (e) {
@@ -142,15 +141,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let disableCategory = await categoriesServices.disable(id, body);
-      if (!disableCategory) {
+      let disabledCategory = await categoryServices.disableCategory(id, body);
+      if (!disabledCategory) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Category Disabled",
-          body: disableCategory,
+          data: disabledCategory,
         });
       }
     } catch (e) {

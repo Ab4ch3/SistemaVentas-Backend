@@ -4,9 +4,8 @@ import mongoose from "mongoose";
 import debug from "debug";
 const logger = debug("app:module-database");
 import Config from "../Config/index.js";
-// const { Config } = require("../Config/index.js");
-var connection = null;
 
+var connection = null;
 const Database = new Promise(async (res, rej) => {
   try {
     if (!connection) {

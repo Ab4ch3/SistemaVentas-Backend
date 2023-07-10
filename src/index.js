@@ -20,9 +20,6 @@ import Config from "./Config/index.js";
 // Importamos Database
 import Database from "./Database/index.js";
 
-// Importamos Router
-// import router from "./Routes/index.js";
-
 // Importamos v1 Router
 import v1Router from "./v1/routes/index.js";
 

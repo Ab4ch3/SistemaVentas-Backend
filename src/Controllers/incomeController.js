@@ -7,8 +7,8 @@ export default {
   getAllIncome: async (req, res, next) => {
     try {
       const { body } = req;
-      let income = await incomeServices.getAll(body);
-      res.status(200).json(income);
+      let Allincome = await incomeServices.getAllIncome(body);
+      res.status(200).json({ data: Allincome });
     } catch (e) {
       logger(e);
       res.status(500).send({
@@ -23,13 +23,13 @@ export default {
       const {
         params: { id },
       } = req;
-      let income = await incomeServices.getById(id);
+      let income = await incomeServices.getIncome(id);
       if (!income) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
-        res.status(200).json(income);
+        res.status(200).json({ data: income });
       }
     } catch (e) {
       logger(e);
@@ -40,7 +40,7 @@ export default {
     }
   },
 
-  addIncome: async (req, res, next) => {
+  createNewIncome: async (req, res, next) => {
     try {
       const { body } = req;
       if (!body || Object.keys(body).length === 0) {
@@ -48,10 +48,10 @@ export default {
           message: "Bad Request",
         });
       } else {
-        const newIncome = await incomeServices.create(body);
+        const createdIncome = await incomeServices.createNewIncome(body);
         res.status(201).json({
           message: "Income Created",
-          body: newIncome,
+          data: createdIncome,
         });
       }
     } catch (e) {
@@ -69,15 +69,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let enableIncome = await incomeServices.enable(id, body);
-      if (!enableIncome) {
+      let enabledIncome = await incomeServices.enableIncome(id, body);
+      if (!enabledIncome) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Income Enabled",
-          body: enableIncome,
+          data: enabledIncome,
         });
       }
     } catch (e) {
@@ -94,15 +94,15 @@ export default {
         params: { id },
       } = req;
       const { body } = req;
-      let disableIncome = await incomeServices.disable(id, body);
-      if (!disableIncome) {
+      let disabledIncome = await incomeServices.disableIncome(id, body);
+      if (!disabledIncome) {
         res.status(404).send({
           message: "Not Found",
         });
       } else {
         res.status(200).json({
           message: "Income Disabled",
-          body: disableIncome,
+          data: disabledIncome,
         });
       }
     } catch (e) {
@@ -113,10 +113,10 @@ export default {
       next(e);
     }
   },
-  GetGraph12Months: async (req, res, next) => {
+  getGraph12Months: async (req, res, next) => {
     try {
-      let graph = await incomeServices.graphs12Months();
-      res.status(200).json(graph);
+      let Allgraph = await incomeServices.getGraph12Months();
+      res.status(200).json({ data: Allgraph });
     } catch (e) {
       logger(e);
       res.status(500).send({
@@ -129,7 +129,7 @@ export default {
     try {
       const { body } = req;
       let result = await incomeServices.checkDates(body);
-      res.status(200).json(result);
+      res.status(200).json({ data: result });
     } catch (e) {
       logger(e);
       res.status(500).send({

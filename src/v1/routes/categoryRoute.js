@@ -1,7 +1,7 @@
 // Importamos Router
 import routerx from "express-promise-router";
 // Importamos el Controlador
-import articleController from "../../Controllers/articleController.js";
+import categoryController from "../../Controllers/categoryController.js";
 //Importamos middleware
 import auth from "../../middlewares/auth.js";
 // Asignamos Router
@@ -9,29 +9,36 @@ const router = routerx();
 
 // Espeficiamos Rutas
 router
-  .get("/", auth.verifyUserStorekeeper, articleController.getArticles)
-  .post("/add", auth.verifyUserStorekeeper, articleController.addArticle)
-  .get("/:id", auth.verifyUserStorekeeper, articleController.getArticle)
-  .get("/code", auth.verifyUserAuth, articleController.getArticleByBarCode)
+  .get("/", auth.verifyUserStorekeeper, categoryController.getAllCategories)
+  .post(
+    "/add",
+    auth.verifyUserStorekeeper,
+    categoryController.createNewCategory
+  )
+  .get(
+    "/:idCategory",
+    auth.verifyUserStorekeeper,
+    categoryController.getCategory
+  )
   .put(
     "/update/:id",
     auth.verifyUserStorekeeper,
-    articleController.updateArticle
+    categoryController.updateCategory
   )
   .put(
     "/enable/:id",
     auth.verifyUserStorekeeper,
-    articleController.enableArticle
+    categoryController.enableCategory
   )
   .put(
     "/disable/:id",
     auth.verifyUserStorekeeper,
-    articleController.disableArticle
+    categoryController.disableCategory
   )
   .delete(
     "/delete/:id",
     auth.verifyUserStorekeeper,
-    articleController.removeArticle
+    categoryController.deleteCategory
   );
 
 export default router;
