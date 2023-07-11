@@ -9,13 +9,17 @@ const router = routerx();
 
 // Espeficiamos Rutas
 router
-  .get("/", auth.verifyUserAdmin, userController.getUsers)
-  .post("/add", auth.verifyUserAdmin, userController.addUser)
-  .get("/:id", auth.verifyUserAdmin, userController.getUser)
-  .put("/update/:id", auth.verifyUserAdmin, userController.updateUser)
-  .put("/password/:id", auth.verifyUserAuth, userController.updatePassword)
-  .put("/enable/:id", auth.verifyUserAdmin, userController.enableUser)
-  .put("/disable/:id", auth.verifyUserAdmin, userController.disableUser)
-  .delete("/delete/:id", auth.verifyUserAdmin, userController.removeUser);
+  .get("/", auth.verifyUserAdmin, userController.getAllUsers)
+  .post("/", auth.verifyUserAdmin, userController.createUser)
+  .get("/:userId", auth.verifyUserAdmin, userController.getUser)
+  .put("/:userId", auth.verifyUserAdmin, userController.updateUser)
+  .patch(
+    "/:userId/password",
+    auth.verifyUserAuth,
+    userController.updatePassword
+  )
+  .patch("/:userId/disable", auth.verifyUserAdmin, userController.disableUser)
+  .patch("/:userId/enable", auth.verifyUserAdmin, userController.enableUser)
+  .delete("/:userId", auth.verifyUserAdmin, userController.deleteUser);
 
 export default router;

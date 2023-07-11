@@ -1,10 +1,9 @@
 import Models from "../Models/index.js";
 import bcrypt from "bcryptjs";
-import token from "./token.js";
 export default {
-  getAll: async (body) => {
-    // Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.
-    // Tambien aplicara busquedas dependiendo del valor q le pasemos
+  getAllUsers: async (body) => {
+    /* Aplica consultas mas preparadas de mongodb, en este caso no se vera created_at y los demas si se mostraran ademas se filtrara de manera desc el created_at.
+    Tambien aplicara busquedas dependiendo del valor q le pasemos */
     let value = body.value;
     return await Models.User.find(
       {
@@ -18,19 +17,18 @@ export default {
       created_at: -1,
     });
   },
-  getById: async (id) => {
-    return await Models.User.findById(id);
+  getUser: async (userId) => {
+    return await Models.User.findById(userId);
   },
-  create: async (user) => {
-    console.log(user, "desde user services");
+  createUser: async (user) => {
     // Encriptamos el password antes de pasarlo al servicio para crear el usuario
     user.password = await bcrypt.hash(user.password, 10);
     return await Models.User.create(user);
   },
-  update: async (id, user) => {
-    const selectedUser = await Models.User.findById(id);
+  updateUser: async (userId, user) => {
+    const selectedUser = await Models.User.findById(userId);
     let result = await Models.User.findByIdAndUpdate(
-      id,
+      userId,
       {
         rol: user.rol,
         name: user.name,
@@ -47,16 +45,16 @@ export default {
     return result;
   },
 
-  updatePassword: async (id, user) => {
+  updatePassword: async (userId, user) => {
     if (user.hasOwnProperty("password")) {
       let pass = user.password;
-      const selectedUser = await Models.User.findById(id);
+      const selectedUser = await Models.User.findById(userId);
 
       if (pass != selectedUser.password) {
         user.password = await bcrypt.hash(user.password, 10);
       }
       let result = await Models.User.findByIdAndUpdate(
-        id,
+        userId,
         {
           password: user.password,
         },
@@ -69,13 +67,13 @@ export default {
       return;
     }
   },
-  delete: async (id) => {
-    let result = await Models.User.findByIdAndDelete(id);
+  deleteUser: async (userId) => {
+    let result = await Models.User.findByIdAndDelete(userId);
     return result;
   },
-  enable: async (id, user) => {
+  enableUser: async (userId, user) => {
     let result = await Models.User.findByIdAndUpdate(
-      id,
+      userId,
       { status: user.status },
       {
         new: true,
@@ -83,9 +81,9 @@ export default {
     );
     return result;
   },
-  disable: async (id, user) => {
+  disableUser: async (userId, user) => {
     let result = await Models.User.findByIdAndUpdate(
-      id,
+      userId,
       { status: user.status },
       {
         new: true,
